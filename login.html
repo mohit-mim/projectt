@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Virtual Study Platform</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            background: #181a20; /* dark background */
+        }
+        .login-card { 
+            background: #23272f; /* dark card */
+            padding: 2rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3); 
+            width: 350px; 
+        }
+        .login-card h2 { 
+            margin-bottom: 1.5rem; 
+            text-align: center; 
+            color: #fff;
+        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 0.5rem; 
+            color: #ccc;
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 0.5rem; 
+            border: 1px solid #444; 
+            border-radius: 4px; 
+            background: #181a20; 
+            color: #fff;
+        }
+        .btn { 
+            width: 100%; 
+            padding: 0.75rem; 
+            background: #2d89ef; 
+            color: #fff; 
+            border: none; 
+            border-radius: 4px; 
+            font-size: 1rem; 
+            cursor: pointer; 
+        }
+        .btn:disabled { background: #aaa; }
+        .error-msg { 
+            color: #e74c3c; 
+            text-align: center; 
+            margin-bottom: 1rem; 
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Login</h2>
+        <div class="error-msg" id="errorMsg">Invalid credentials</div>
+        <form id="loginForm" autocomplete="off">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+    <script>
+        // Demo users for front-end authentication
+        const users = [
+            { email: "student@example.com", password: "student123", name: "Student User", role: "student" },
+            { email: "teacher@example.com", password: "teacher123", name: "Teacher User", role: "teacher" }
+        ];
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const user = users.find(u => u.email === email && u.password === password);
+            if(user) {
+                localStorage.setItem('vsp_user', JSON.stringify(user)); // Corrected: Store user data in localStorage
+                window.location.href = "../mohit-proj.html";
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
